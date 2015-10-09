@@ -15,24 +15,24 @@
 #include "shader.h"
 #include "view3d.h"
 
-#include <QtCore/QSignalMapper>
-#include <QtCore/QThread>
-#include <QtCore/QUrl>
-#include <QtGui/QApplication>
-#include <QtGui/QColorDialog>
-#include <QtGui/QDockWidget>
-#include <QtGui/QFileDialog>
-#include <QtGui/QGridLayout>
-#include <QtGui/QMenuBar>
-#include <QtGui/QMessageBox>
-#include <QtGui/QPlainTextEdit>
-#include <QtGui/QProgressBar>
-#include <QtGui/QSplitter>
-#include <QtGui/QDoubleSpinBox>
-#include <QtGui/QDesktopWidget>
-#include <QtGui/QDropEvent>
-#include <QtNetwork/QLocalServer>
-
+#include <QSignalMapper>
+#include <QThread>
+#include <QUrl>
+#include <QApplication>
+#include <QColorDialog>
+#include <QDockWidget>
+#include <QFileDialog>
+#include <QGridLayout>
+#include <QMenuBar>
+#include <QMessageBox>
+#include <QPlainTextEdit>
+#include <QProgressBar>
+#include <QSplitter>
+#include <QDoubleSpinBox>
+#include <QDesktopWidget>
+#include <QDropEvent>
+#include <QLocalServer>
+#include <QMimeData>
 
 //------------------------------------------------------------------------------
 // PointViewerMainWindow implementation

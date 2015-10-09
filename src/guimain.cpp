@@ -3,10 +3,10 @@
 
 #include "mainwindow.h"
 
-//#include <QtCore/QDataStream>
-#include <QtCore/QTextCodec>
-#include <QtGui/QApplication>
-#include <QtOpenGL/QGLFormat>
+//#include <QDataStream>
+#include <QTextCodec>
+#include <QApplication>
+#include <QSurfaceFormat>
 
 #include "argparse.h"
 #include "config.h"
@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
     }
 
     QApplication app(argc, argv);
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf8"));
+    // Qt5: no longer required // QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf8"));
 
     setupQFileSearchPaths();
 
@@ -70,9 +70,9 @@ int main(int argc, char* argv[])
     // Multisampled antialiasing - this makes rendered point clouds look much
     // nicer, but also makes the render much slower, especially on lower
     // powered graphics cards.
-    //QGLFormat f = QGLFormat::defaultFormat();
+    //QSurfaceFormat f = QSurfaceFormat::defaultFormat();
     //f.setSampleBuffers(true);
-    //QGLFormat::setDefaultFormat(f);
+    //QSurfaceFormat::setDefaultFormat(f);
 
     PointViewerMainWindow window;
     InterProcessLock instanceLock(lockName);
