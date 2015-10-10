@@ -70,9 +70,11 @@ int main(int argc, char* argv[])
     // Multisampled antialiasing - this makes rendered point clouds look much
     // nicer, but also makes the render much slower, especially on lower
     // powered graphics cards.
-    //QSurfaceFormat f = QSurfaceFormat::defaultFormat();
+    QSurfaceFormat f = QSurfaceFormat::defaultFormat();
+    f.setVersion(3, 2);
+    f.setProfile(QSurfaceFormat::CoreProfile);
     //f.setSampleBuffers(true);
-    //QSurfaceFormat::setDefaultFormat(f);
+    QSurfaceFormat::setDefaultFormat(f);
 
     PointViewerMainWindow window;
     InterProcessLock instanceLock(lockName);
