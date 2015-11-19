@@ -36,6 +36,7 @@ View3D::View3D(GeometryCollection* geometries, const QGLFormat& format, QWidget 
     m_drawCursor(true),
     m_drawAxes(true),
     m_drawGrid(false),
+    m_autoRotate(false),
     m_badOpenGL(false),
     m_shaderProgram(),
     m_geometries(geometries),
@@ -199,6 +200,11 @@ void View3D::toggleCameraMode()
     m_camera.setTrackballInteraction(!m_camera.trackballInteraction());
 }
 
+void View3D::toggleAutoRotate()
+{
+    m_autoRotate = !m_autoRotate;
+    restartRender();
+}
 
 void View3D::centerOnGeometry(const QModelIndex& index)
 {

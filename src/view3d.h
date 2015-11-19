@@ -60,6 +60,7 @@ class View3D : public QGLWidget
         void toggleDrawAxes();
         void toggleDrawGrid();
         void toggleCameraMode();
+        void toggleAutoRotate();
         /// Centre on loaded geometry file at the given index
         void centerOnGeometry(const QModelIndex& index);
 
@@ -124,6 +125,7 @@ class View3D : public QGLWidget
         bool m_drawCursor;
         bool m_drawAxes;
         bool m_drawGrid;
+        bool m_autoRotate;
         /// If true, OpenGL initialization didn't work properly
         bool m_badOpenGL;
         /// Shader for point clouds

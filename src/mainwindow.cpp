@@ -101,6 +101,11 @@ PointViewerMainWindow::PointViewerMainWindow(const QGLFormat& format)
     screenShotAct->setShortcut(Qt::Key_F9);
     connect(screenShotAct, SIGNAL(triggered()), this, SLOT(screenShot()));
 
+    QAction* animationShotAct = fileMenu->addAction(tr("&Animation"));
+    animationShotAct->setStatusTip(tr("Save a 360 degree round shot of 3D view"));
+    animationShotAct->setShortcut(Qt::Key_F10);
+    connect(animationShotAct, SIGNAL(triggered()), this, SLOT(animation()));
+
     fileMenu->addSeparator();
     QAction* quitAct = fileMenu->addAction(tr("&Quit"));
     quitAct->setStatusTip(tr("Exit the application"));
@@ -155,6 +160,11 @@ PointViewerMainWindow::PointViewerMainWindow(const QGLFormat& format)
     drawGrid->setCheckable(true);
     drawGrid->setChecked(false);
 
+    viewMenu->addSeparator();
+    QAction* autoRotate = viewMenu->addAction(tr("Auto &Rotate"));
+    autoRotate->setCheckable(true);
+    autoRotate->setChecked(false);
+
     // Shader menu
     QMenu* shaderMenu = menuBar()->addMenu(tr("&Shader"));
     QAction* openShaderAct = shaderMenu->addAction(tr("&Open"));
@@ -192,6 +202,8 @@ PointViewerMainWindow::PointViewerMainWindow(const QGLFormat& format)
             m_pointView, SLOT(toggleCameraMode()));
     connect(m_geometries, SIGNAL(rowsInserted(QModelIndex,int,int)),
             this, SLOT(geometryRowsInserted(QModelIndex,int,int)));
+    connect(autoRotate, SIGNAL(triggered()),
+            m_pointView, SLOT(toggleAutoRotate()));
 
     //--------------------------------------------------
     // Docked widgets
@@ -588,6 +600,20 @@ void PointViewerMainWindow::screenShot()
     sshot.save(fileName);
 }
 
+void PointViewerMainWindow::animation()
+{
+    // Basically we want to rotate the scene and take a screenshot every degree (or so)
+    // Automatically save these screenshots as a sequence of images (and later convert them to video)
+    QPoint tl = m_pointView->mapToGlobal(QPoint(0,0));
+    QPixmap sshot = QPixmap::grabWindow(QApplication::desktop()->winId(),
+                                        tl.x(), tl.y(),
+                                        m_pointView->width(), m_pointView->height());
+
+    // QDir::currentPath()
+    QString fileName = tr("VideoFrame0000.png");
+
+    sshot.save(fileName);
+}
 
 void PointViewerMainWindow::aboutDialog()
 {

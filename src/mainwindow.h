@@ -64,6 +64,7 @@ class PointViewerMainWindow : public QMainWindow
         void compileShaderFile();
         void reloadFiles();
         void screenShot();
+        void animation();
         void helpDialog();
         void aboutDialog();
         void setBackground(const QString& name);
