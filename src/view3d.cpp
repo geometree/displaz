@@ -384,6 +384,11 @@ void View3D::paintGL()
 
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_incrementalFramebuffer);
 
+    if (m_autoRotate)
+    {
+        m_camera.mouseDrag(QPoint(0.0,0.0), QPoint(1.0,0.0), false);
+    }
+
     //--------------------------------------------------
     // Draw main scene
     TransformState transState(Imath::V2i(w, h),
@@ -476,10 +481,10 @@ void View3D::paintGL()
         drawAxes();
 
     // Set up timer to draw a high quality frame if necessary
-    if (!drawCount.moreToDraw)
-        m_incrementalFrameTimer->stop();
-    else
+    if (drawCount.moreToDraw || m_autoRotate)
         m_incrementalFrameTimer->start(10);
+    else
+        m_incrementalFrameTimer->stop();
 
     m_incrementalDraw = true;
 
